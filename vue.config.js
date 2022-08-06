@@ -65,8 +65,20 @@ module.exports = {
       },
     ]);
 
-    // when there are many pages, it will cause too many meaningless requests
-    config.plugins.delete("prefetch");
+    chainWebpack: (config) => {
+      config.module
+        .rule("css")
+        .test(/\.css$/)
+        .oneOf("vue")
+        .resourceQuery(/\?vue/)
+        .use("px2rem")
+        .loader("px2rem-loader")
+        .options({
+          remUnit: 192, //稿子宽度的1/10，此处我的项目为1920，根据实际情况修改
+        });
+    },
+      // when there are many pages, it will cause too many meaningless requests
+      config.plugins.delete("prefetch");
 
     // set svg-sprite-loader
     config.module.rule("svg").exclude.add(resolve("src/icons")).end();
