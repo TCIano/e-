@@ -137,7 +137,7 @@ export const constantRoutes = [
       },
       {
         path: "statistic",
-        component: () => import("@/views/human"),
+        component: () => import("@/views/human/components/rxtj"),
 
         meta: { title: "人效统计" },
       },
