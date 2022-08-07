@@ -119,6 +119,7 @@ export default {
   width: 100%;
   height: 100%;
   background: url("../../assets/bg.png");
+  background-size: cover;
   // margin: 0 auto;
   text-align: center;
   .avator {
@@ -194,6 +195,7 @@ export default {
     .loginBtn {
       width: 446px;
       height: 52px;
+      margin-top: 10px;
       border-radius: 10px;
       background-color: #697bee;
       color: #fff;
