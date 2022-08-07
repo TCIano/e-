@@ -7,3 +7,10 @@ export function getList(params) {
     params
   })
 }
+export function searchUserWork(params) {
+  return request({
+    url: '/user-service/user/searchUserWork',
+    method: 'get',
+    params
+  })
+}
