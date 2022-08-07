@@ -4,18 +4,74 @@
       <el-col :span="12">
         <div class="yyry">
           <div class="title">运营人员(当天)</div>
+          <div class="data">
+            <el-row :gutter="20">
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div></el-col
+              >
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div></el-col
+              >
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div></el-col
+              >
+            </el-row>
+          </div>
         </div>
       </el-col>
       <el-col :span="12">
         <div class="ywry">
           <div class="title">运维人员(当天)</div>
+          <div class="data">
+            <el-row :gutter="20">
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div></el-col
+              >
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div></el-col
+              >
+              <el-col :span="6">
+                <div class="grid-content">
+                  <div class="num">1</div>
+                  <div class="text">工单总数（个）</div>
+                </div></el-col
+              >
+            </el-row>
+          </div>
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="24">
-      <el-col :span="18" class="gdzt">
-        <div class="gdzt-top">
-          <div class="title">人效排名（月度）</div>
+      <el-col :span="18">
+        <div class="gdzt">
+          <div class="title">工单状态</div>
           <div class="block">
             <el-date-picker
               v-model="value"
@@ -26,14 +82,57 @@
             >
             </el-date-picker>
           </div>
-        </div>
-        <div class="gdzt-main">
-          <img src="@/assets/rxtj/rxtj4.png" alt="" />
-          <div class="tips">暂无数据</div>
+          <div style="margin: 30px">
+            <el-radio-group
+              v-model="radio1"
+              size="small"
+              text-color="black"
+              fill="#6480e3"
+            >
+              <el-radio-button label="周"></el-radio-button>
+              <el-radio-button label="月"></el-radio-button>
+              <el-radio-button label="年"></el-radio-button>
+            </el-radio-group>
+          </div>
+          <div class="err">
+            <img src="@/assets/rxtj/rxtj4.png" alt="" />
+            <div class="tips">暂无数据</div>
+          </div>
         </div>
       </el-col>
       <el-col :span="6">
-        <div class="rxpm"><div class="title">人效排名（月度）</div></div>
+        <div class="rxpm">
+          <div class="title">人效排名（月度）</div>
+          <div class="check">
+            <el-radio-group
+              v-model="radio2"
+              size="small"
+              text-color="black"
+              fill="#6480e3"
+            >
+              <el-radio-button label="运营人员"></el-radio-button>
+              <el-radio-button label="运维人员"></el-radio-button>
+            </el-radio-group>
+          </div>
+          <div class="choose">
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                全部<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>黄金糕</el-dropdown-item>
+                <el-dropdown-item>狮子头</el-dropdown-item>
+                <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+                <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+          <div class="err">
+            <img src="@/assets/rxtj/rxtj4.png" alt="" />
+            <div class="tips">暂无数据</div>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -44,6 +143,8 @@ export default {
   data() {
     return {
       value: "",
+      radio1: "周",
+      radio2: "运营人员",
     };
   },
 
@@ -84,23 +185,26 @@ export default {
   background-repeat: no-repeat, no-repeat;
   background-position: 0 0, calc(100% - 12px) 100%;
   height: calc(25vh - 30px);
-  min-height: 166px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
 }
 .ywry {
   background: #fbefe8 url(~@/assets/rxtj/rxtj3.png) no-repeat calc(100% - 12px)
     100%;
   height: calc(25vh - 30px);
-  min-height: 166px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
 }
 .gdzt {
-  min-height: 166px;
   position: relative;
   height: calc(75vh - 90px);
-  min-height: 542px;
-  margin-top: 20px;
+  min-height: 700px;
   background: #fff;
-}
-.gdzt-top {
+  border-radius: 30px;
   display: flex;
 }
 .title {
@@ -108,24 +212,77 @@ export default {
   align-items: center;
   -webkit-box-flex: 1;
   flex: 1;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: #333;
+  margin: 30px;
 }
-.gdzt-main {
+.block {
+  margin: 30px;
+}
+.err {
   position: absolute;
   margin-top: 100px;
   width: 100%;
   height: 100%;
-  left: 25%;
-  right: 25%;
+  left: 35%;
   top: 25%;
-  bottom: 25%;
+}
+.tips {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 50px;
 }
 .rxpm {
   height: calc(75vh - 90px);
-  min-height: 542px;
-  margin-top: 20px;
+  min-height: 700px;
   background: #fff;
+  border-radius: 30px;
+  display: flex;
+  position: relative;
+}
+.choose {
+  width: 110px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin: 20px;
+  margin-right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.el-dropdown-link {
+  width: 50px;
+  height: 20px;
+  cursor: pointer;
+  color: #ccc;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+  margin-left: 20px;
+}
+.check {
+  position: absolute;
+  margin: 90px;
+}
+.num {
+  text-shadow: 4px 8px 14px rgb(85 132 255 / 50%);
+  color: #072074;
+  height: 100px;
+  font-size: 50px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  line-height: 100px;
+  margin-left: 70px;
+}
+.text {
+  height: 17px;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #91a7dc;
+  line-height: 17px;
+  margin-left: 50px;
 }
 </style>

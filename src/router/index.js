@@ -143,7 +143,7 @@ export const constantRoutes = [
       },
       {
         path: "work",
-        component: () => import("@/views/human"),
+        component: () => import("@/views/human/components/gzllb"),
 
         meta: { title: "工作量列表" },
       },
