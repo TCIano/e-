@@ -6,7 +6,6 @@
       :data="tableData"
       stripe
       style="width: 100%; text-align: center"
-      header-cell-style="background:#f3f6fb"
     >
       <el-table-column prop="date" type="index" label="序号"> </el-table-column>
       <el-table-column
@@ -16,11 +15,11 @@
         :key="index"
       >
       </el-table-column>
-      <!-- <el-table-column :prop="createType" label="工单方式"> </el-table-column> -->
 
-      <el-table-column fixed="right" label="操作" width="100">
+      <!-- 操作区域 -->
+      <el-table-column fixed="right" label="操作">
         <template>
-          <el-button type="text" size="small">查看详情</el-button>
+          <slot name="options"></slot>
         </template>
       </el-table-column>
     </el-table>

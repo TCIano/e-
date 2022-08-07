@@ -30,7 +30,6 @@ export default {
   props: {
     pageInfo: {
       type: Object,
-      required: true,
     },
   },
   created() {},
