@@ -2,13 +2,13 @@
   <div class="search">
     <el-form :inline="true" class="demo-form-inline">
       <!-- <slot></slot> -->
-      <el-form-item label="工单编号">
+      <el-form-item :label="inputInfo.one" v-if="inputInfo">
         <el-input
           placeholder="请输入"
           v-model="searchContion.taskCode"
         ></el-input>
       </el-form-item>
-      <el-form-item label="工单状态">
+      <el-form-item :label="inputInfo.two" v-if="!isSingle">
         <el-select placeholder="请选择" v-model="searchContion.status">
           <el-option
             :label="item.label"
@@ -42,7 +42,12 @@ export default {
   props: {
     option: {
       type: Array,
-      required: true,
+    },
+    isSingle: {
+      type: String,
+    },
+    inputInfo: {
+      type: Object,
     },
   },
   created() {},
