@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import InputForm from '@/components/form'
+import InputForm from '@/components/InputFrom'
 import FormItem from "@/components/form";
 export default {
   components: {
@@ -17,7 +17,7 @@ export default {
     return {
     tableHead: [
     {
-    column_name: 'classId'
+    column_name: 'classId',
     column_comment: '序号'
     }
     ]
