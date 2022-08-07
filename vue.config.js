@@ -17,6 +17,38 @@ const port = process.env.port || process.env.npm_config_port || 8080; // dev por
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
+  css: {
+    requireModuleExtension: true,
+    sourceMap: true,
+    // 全局样式
+    loaderOptions: {
+      postcss: {
+        plugins: [
+          require("postcss-px-to-viewport")({
+            unitToConvert: "px", // 需要转换的单位，默认为"px"
+            viewportWidth: 1920, // 视窗的宽度，对应pc设计稿的宽度，一般是1920
+            viewportHeight: 1080, // 视窗的高度，对应的是我们设计稿的高度,我做的是大屏监控,高度就是1080
+            unitPrecision: 6, // 单位转换后保留的精度
+            propList: [
+              // 能转化为vw的属性列表
+              "*",
+              // '!font-size',
+            ],
+            viewportUnit: "vw", // 希望使用的视口单位
+            fontViewportUnit: "vw", // 字体使用的视口单位
+            selectorBlackList: [], // 需要忽略的CSS选择器，不会转为视口单位，使用原有的px等单位。
+            minPixelValue: 1, // 设置最小的转换数值，如果为1的话，只有大于1的值会被转换
+            mediaQuery: false, // 媒体查询里的单位是否需要转换单位
+            replace: true, // 是否直接更换属性值，而不添加备用属性
+            exclude: [
+              /(\/|\\)(node_modules)(\/|\\)/,
+              /\components\/reportDetaillList\/toll_administration\/sf-report.vue/,
+            ], // 忽略某些文件夹下的文件或特定文件，例如 'node_modules' 下的文件
+          }),
+        ],
+      },
+    },
+  },
   /**
    * You will need to set publicPath if you plan to deploy your site under a sub path,
    * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
