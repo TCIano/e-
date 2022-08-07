@@ -1,6 +1,10 @@
 <template>
   <div>
-    <input-form :option="option" @searchContionTask="searchContionTask">
+    <input-form
+      :option="option"
+      @searchContionTask="searchContionTask"
+      isSingle="false"
+    >
     </input-form>
     <form-item :tableData="taskList" :tableHead="tableHead">
       <btn></btn>

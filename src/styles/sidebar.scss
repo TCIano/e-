@@ -7,11 +7,15 @@
     // margin-left: $sideBarWidth;
     position: relative;
     // margin: 10px;
+    width: 100%;
     // padding: 20px;
-
+    margin-top: 60px;
+    margin-left: 180px;
   .sidebar-container {
     transition: width 0.28s;
     // width: $sideBarWidth !important;
+    position: fixed;
+    top: 60px;
     
     // width: 200px;
     background-color: $menuBg;

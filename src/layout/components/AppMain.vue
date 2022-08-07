@@ -21,6 +21,7 @@ export default {
 .app-main {
   background-color: #f8fafd;
   /* margin: 20px; */
+  /* margin-top: 60px; */
   padding: 20px;
   /*50 = navbar  */
   min-height: calc(100vh - 50px);
