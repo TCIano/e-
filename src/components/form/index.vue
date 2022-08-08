@@ -46,6 +46,7 @@ export default {
   props: {
     tableData: {
       type: Array,
+      required:true
     },
     tableHead: {
       type: Array,

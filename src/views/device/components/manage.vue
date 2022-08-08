@@ -1,5 +1,5 @@
 <template>
-  <div>设备</div>
+  <div>设备管理</div>
 </template>
 
 <script>

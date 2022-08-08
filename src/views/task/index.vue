@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("submit!");
+      // console.log("submit!");
     },
     //获取工单
     async searchTask(contion) {
@@ -129,7 +129,7 @@ export default {
     },
     //条件搜索 工单
     searchContionTask(val) {
-      console.log(val);
+      // console.log(val);
       this.searchTask(val);
     },
   },

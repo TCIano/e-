@@ -5,6 +5,7 @@ import app from "./modules/app";
 import settings from "./modules/settings";
 import user from "./modules/user";
 import createVuexPersisted from "vuex-persistedstate";
+import facility from './modules/facility'
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
     app,
     settings,
     user,
+    facility
   },
   getters,
   plugins: [createVuexPersisted()], //持久化插件
