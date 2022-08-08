@@ -38,7 +38,7 @@
     <slot name="page" class="page"></slot>
 
     <!-- 新增弹窗 -->
-    <el-dialog title="新增人员" :visible="dialogTableVisible">
+    <el-dialog title="新增人员" :visible="dialogTableVisible" @close="$emit('update:dialogTableVisible',false)">
       <el-form ref="form" :model="form" label-width="100px">
         <el-form-item label="人员名称：">
           <el-input v-model="form.userName"></el-input>
@@ -296,10 +296,10 @@ export default {
       var formData = new FormData();
       formData.append("fileName", file.file);
       console.log(formData);
-      const { data } = await getUserServeFileUploadApi(formData)
-      console.log(data);
-      this.form.image = data
-      console.log(data)
+      const res = await getUserServeFileUploadApi(formData)
+      console.log(res);
+      this.form.image = res
+      console.log(res)
     },
     // 校验图片
     beforeAvatarUpload(file) {
