@@ -13,11 +13,24 @@ export function getproductApi(params) {
 }
 
 //修改
-export function setProductApi(params) {
+/**
+ * 修改商品类型名称
+ * @param {*} id classId
+ * @param {*} data className
+ * @returns promise
+ */
+export function setProductApi(id) {
     return request({
-    url: '/vm-service/skuClass/:classId',
+    url: '/vm-service/skuClass/' + id ,
+    method: 'GET',
+    })
+}
+
+export function editProductApi(id, data) {
+    return request({
+    url: '/vm-service/skuClass/' + id ,
     method: 'PUT',
-    
+    data
     })
 }
 

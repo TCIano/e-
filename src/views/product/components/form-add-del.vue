@@ -19,7 +19,11 @@
 
       <el-table-column fixed="right" label="操作" width="100">
         <template v-slot="scoped">
-          <el-button type="text" size="small">修改</el-button>
+          <el-button 
+          type="text" 
+          size="small"
+          @click.native="$emit('edit',scoped.row)"
+          >修改</el-button>
           <el-button 
           type="text" 
           size="small" 

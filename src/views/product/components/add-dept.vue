@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     @close="onClose"
-    title="新增商品类型"
+    :title="dialogTitle"
     :visible="visible"
     width="50%"
   >
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import { addProductApi } from "@/api/product";
+import { addProductApi, setProductApi, editProductApi } from "@/api/product";
 export default {
   data() {
     //校验商品类名是否重复
     const checkDeptName = (rule, value, callback) => {
-      console.log(this.currentNode);
+      // console.log(this.currentNode);
       const isRepeat = this.currentNode.some((item) => {
         return item.className === value;
       });
@@ -61,22 +61,50 @@ export default {
     },
   },
 
+  computed: {
+    dialogTitle() {
+      return this.form.classId ? "修改商品类型" : "新增商品类型";
+    },
+  },
+
   created() {},
 
   methods: {
+    //关闭弹层
     onClose() {
       this.$emit("update:visible", false);
+      this.$refs.form.resetFields();
+      this.form = {className: "",}
     },
+    //点击添加确定
     async onSave() {
       await this.$refs.form.validate();
-      try {
-        await addProductApi(this.form);
-        this.$message.success("添加商品类名成功");
+      console.log(this.form.classId);
+      if (this.form.classId) {
+        //发送修改请求
+        console.log("修改");
+        await editProductApi(this.form.classId, this.form);
+        this.$message.success("修改成功");
         this.onClose();
-        this.$emit('add-success')
-      } catch (error) {
-        this.$message.error('添加商品类名失败')
+        this.$emit("add-success");
+      } else {
+        //发送新增请求
+        try {
+          await addProductApi(this.form);
+          this.$message.success("添加商品类名成功");
+          this.onClose();
+          this.$emit("add-success");
+        } catch (error) {
+          this.$message.error("添加商品类名失败");
+        }
       }
+    },
+    async getDeptById(id) {
+      // console.log(5566);
+      console.log(id);
+      // console.log(res);
+      this.form = await setProductApi(id);
+      console.log(this.form);
     },
   },
 };
