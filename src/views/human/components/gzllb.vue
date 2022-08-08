@@ -10,8 +10,8 @@
       :tableData="taskList"
       :pageIndex="pageInfo.pageIndex"
     >
-      <template v-slot:options>
-        <el-button type="text" @click="onDetails">查看详情</el-button>
+      <template v-slot:options="scope">
+        <el-button type="text" @click="onDetails(scope)">查看详情</el-button>
       </template>
       <template v-slot:page>
         <page
@@ -90,9 +90,11 @@ export default {
       console.log(val);
       this.getuserwork(val);
     },
-    onDetails() {
+    onDetails(val) {
+      // console.log(val);
       this.dialogVisible = true;
-      this.$refs.detail.getDetailsInfo();
+      // this.$refs.detail.getDetailsInfo(val.scope.$index);
+      // console.log(val.scope.$index);
     },
   },
 };
