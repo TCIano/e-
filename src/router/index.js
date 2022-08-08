@@ -131,7 +131,7 @@ export const constantRoutes = [
     children: [
       {
         path: "index",
-        component: () => import("@/views/human"),
+        component: () => import("@/views/human/components/peopleList/index"),
 
         meta: { title: "人员列表" },
       },
