@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import pageItem from "@/components/Pageindex";
+import pageItem from "./compoments/Pageindex";
 import { peopleListApi, delPeopleListApi } from "@/api/people";
 import InputForm from "./compoments/input.vue";
 import FormItem from "./compoments/form.vue";
