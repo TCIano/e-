@@ -17,3 +17,11 @@ export function getAreaApi(params) {
     params
   })
 }
+
+export function getSearchApi(params) {
+  return request({
+    url: '/user-service/user/searchUserWork',
+    method: 'get',
+    params
+  })
+}

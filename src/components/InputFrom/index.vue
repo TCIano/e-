@@ -12,7 +12,7 @@
         <el-select placeholder="请选择" v-model="searchContion.status">
           <el-option
             :label="item.label"
-            :value="index + 1"
+            :value="item.id || item.label || index + 1"
             v-for="(item, index) in option"
             :key="index"
           ></el-option>

@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { getSearchApi } from "@/api/request";
 import inputForm from "@/components/InputFrom";
 import btn from "@/components/button/index.vue";
 import inform from "@/components/form/index.vue";
@@ -38,6 +39,7 @@ export default {
     return {
       dialogVisible: false,
       taskList: [],
+      // id: null,
       inputInfo: {
         one: "人员搜索",
         two: "角色",
@@ -86,14 +88,20 @@ export default {
     nextClick() {
       this.getuserwork({ pageIndex: `${this.pageInfo.pageIndex + 1}` });
     },
-    searchContionTask(val) {
-      console.log(val);
-      this.getuserwork(val);
+    async searchContionTask(val) {
+      const res = await getSearchApi({
+        userName: val.userName,
+        isRepair: val.status === "运营员" ? false : true,
+      });
+      console.log(res);
+      this.taskList = res.currentPageRecords;
+      // console.log(res);
     },
     onDetails(val) {
-      // console.log(val);
+      // console.log(val.scope.row.userId);
       this.dialogVisible = true;
-      // this.$refs.detail.getDetailsInfo(val.scope.$index);
+      const id = val.scope.row.userId;
+      this.$refs.detail.getDetailsInfo(id);
       // console.log(val.scope.$index);
     },
   },
