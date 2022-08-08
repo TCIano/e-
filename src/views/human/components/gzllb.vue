@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import inputForm from "@/components/InputFrom/index.vue";
+import inputForm from "@/components/InputFrom";
 import btn from "@/components/button/index.vue";
 import inform from "@/components/form/index.vue";
 import page from "@/components/pageItem/index.vue";
