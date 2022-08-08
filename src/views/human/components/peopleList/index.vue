@@ -7,10 +7,10 @@
       :tableData="peopleList"
       :tableHead="tableHead"
       @deleteListPeople="deleteListPeople"
-      @click.native="addFn"
+      :dialogTableVisible="dialogTableVisible"
     >
       <!-- 按钮 -->
-      <btn @click.native="addFn"></btn>
+      <btn @click.native="addBtn"></btn>
       <!-- //分页 -->
       <template #page>
         <pageItem :page="pageInfo" @changePage="changePage" ></pageItem>
@@ -35,7 +35,7 @@ export default {
       peopleList: [],
       // 负责区域
       quyuList:[],
-      
+      dialogTableVisible: false,
       
       // 分页
       pageInfo: {
@@ -125,8 +125,9 @@ export default {
       this.peopleListMd(res.currentPageRecords);
     },
     // 添加
-    addFn() {
+    addBtn() {
       // console.log(11);
+      this.dialogTableVisible = true;
     },
  
      

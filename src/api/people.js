@@ -48,8 +48,11 @@ export const editUserInfoApi = (id,data) => {
     data,
   });
 };
-// 上传头像  
-
+/**
+ * 上传头像 
+ * @param {*} data 
+ * @returns 
+ */
 export const getUserServeFileUploadApi = (data) => {
   return request({
     url: "vm-service/sku/fileUpload",
@@ -57,6 +60,16 @@ export const getUserServeFileUploadApi = (data) => {
     data,
   });
 };
+
+// 新增人员
+export const addUserInfoApi = (data) => {
+  return request({
+    url: "/user-service/user",
+    method: "POST",
+    data,
+  });
+};
+
 
 
 
