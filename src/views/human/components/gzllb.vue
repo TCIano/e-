@@ -29,7 +29,6 @@
 <script>
 import { getSearchApi } from "@/api/request";
 import inputForm from "@/components/InputFrom";
-import btn from "@/components/button/index.vue";
 import inform from "@/components/form/index.vue";
 import page from "@/components/pageItem/index.vue";
 import getdetails from "./details.vue";
@@ -63,7 +62,6 @@ export default {
 
   components: {
     inputForm,
-    btn,
     inform,
     page,
     getdetails,

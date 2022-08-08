@@ -34,3 +34,16 @@ export function delProductApi(id) {
     
     })
 }
+
+// 商品管理-start
+export function manageProductApi(params) {
+    return request({
+    url: '/vm-service/sku/search',
+    method: 'GET',
+    params
+    })
+}
+
+
+
+// 商品管理-end
