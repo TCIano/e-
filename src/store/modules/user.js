@@ -22,7 +22,7 @@ export default {
       //发送请求
       const res = await login(payload);
       // console.log(res);
-      console.log(res.request.responseURL);
+      // console.log(res.request.responseURL);
       // console.log(this);
       if (res.data.success) {
         this._vm.$message.success("登录成功");
@@ -40,7 +40,7 @@ export default {
     //获取用户信息
     async getUserInfo(context) {
       const res = await getUserInfo(context.state.token.userId);
-      console.log(res);
+      // console.log(res);
       context.commit("setUserInfo", res);
     },
     //退出登录

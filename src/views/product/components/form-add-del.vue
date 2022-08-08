@@ -11,15 +11,20 @@
       <el-table-column
         :prop="item.column_name"
         :label="item.column_comment"
-        v-for="(item, index) in tableHead"
-        :key="index"
+        v-for="item in tableHead"
+        :key="item.classId"
       >
       </el-table-column>
       <!-- <el-table-column :prop="createType" label="工单方式"> </el-table-column> -->
 
       <el-table-column fixed="right" label="操作" width="100">
         <template>
-          <el-button type="text" size="small">查看详情</el-button>
+          <el-button type="text" size="small">修改</el-button>
+          <el-button 
+          type="text" 
+          size="small" 
+          @click.native="onRemove"
+          style="color: red;">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -47,7 +52,11 @@ export default {
 
   created() {},
 
-  methods: {},
+  methods: {
+  onRemove() {
+  console.log(this.tableData);
+  }
+  },
 };
 </script>
 
