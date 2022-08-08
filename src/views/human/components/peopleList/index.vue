@@ -7,7 +7,7 @@
       :tableData="peopleList"
       :tableHead="tableHead"
       @deleteListPeople="deleteListPeople"
-      :dialogTableVisible="dialogTableVisible"
+      :dialogTableVisible.sync="dialogTableVisible"
     >
       <!-- 按钮 -->
       <btn @click.native="addBtn"></btn>
