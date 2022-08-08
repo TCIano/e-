@@ -18,12 +18,12 @@
       <!-- <el-table-column :prop="createType" label="工单方式"> </el-table-column> -->
 
       <el-table-column fixed="right" label="操作" width="100">
-        <template>
+        <template v-slot="scoped">
           <el-button type="text" size="small">修改</el-button>
           <el-button 
           type="text" 
           size="small" 
-          @click.native="onRemove"
+          @click.native="onRemove(scoped)"
           style="color: red;">删除</el-button>
         </template>
       </el-table-column>
