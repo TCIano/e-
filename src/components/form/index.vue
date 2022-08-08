@@ -6,7 +6,6 @@
       :data="tableData"
       stripe
       style="width: 100%; text-align: center"
-      header-cell-style="background:#f3f6fb"
     >
       <el-table-column prop="date" type="index" label="序号"> </el-table-column>
       <el-table-column
@@ -40,6 +39,7 @@ export default {
   props: {
     tableData: {
       type: Array,
+      required:true
     },
     tableHead: {
       type: Array,

@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("submit!");
+      // console.log("submit!");
     },
     //获取工单
     async searchTask(contion) {
@@ -107,7 +107,7 @@ export default {
         item.createTime = item.createTime.replace(/-/g, ".");
         item.createTime = item.createTime.replace(/T/g, " ");
       });
-      console.log(res.currentPageRecords);
+      // console.log(res.currentPageRecords);
       this.pageInfo.pageIndex = parseInt(res.pageIndex);
       this.pageInfo.totalPage = parseInt(res.totalPage);
       this.pageInfo.totalCount = parseInt(res.totalCount);
@@ -136,7 +136,7 @@ export default {
     },
     //条件搜索 工单
     searchContionTask(val) {
-      console.log(val);
+      // console.log(val);
       this.searchTask(val);
     },
   },

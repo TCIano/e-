@@ -101,23 +101,23 @@ export const constantRoutes = [
     component: Layout,
     path: "/device",
     name: "device",
+    redirect: '/device/manage',
     meta: { title: "设备管理", icon: "icon" },
     children: [
       {
-        path: "index",
-        component: () => import("@/views/device"),
-
+        path: "manage",
+        component: () => import("@/views/device/components/manage"),
         meta: { title: "设备管理" },
       },
       {
         path: "status",
-        component: () => import("@/views/device"),
+        component: () => import("@/views/device/components/status"),
 
         meta: { title: "设备状态" },
       },
       {
         path: "type",
-        component: () => import("@/views/device"),
+        component: () => import("@/views/device/components/Typemanagement"),
 
         meta: { title: "设备类型管理" },
       },
