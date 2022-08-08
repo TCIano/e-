@@ -7,26 +7,24 @@
       stripe
       style="width: 100%; text-align: center"
     >
-      <el-table-column
-        prop="date"
-        type="index"
-        :index="handleIndex"
-        label="序号"
-      >
-      </el-table-column>
+      <el-table-column prop="date" type="index" label="序号"> </el-table-column>
       <el-table-column
         :prop="item.column_name"
         :label="item.column_comment"
-        v-for="(item, index) in tableHead"
-        :key="index"
+        v-for="item in tableHead"
+        :key="item.classId"
       >
       </el-table-column>
+      <!-- <el-table-column :prop="createType" label="工单方式"> </el-table-column> -->
 
-      <!-- 操作区域 -->
-      <el-table-column fixed="right" label="操作">
-        <template slot-scope="scope">
-          <slot name="options" :scope="scope"></slot>
-          <!-- <el-button @>jianji</el-button> -->
+      <el-table-column fixed="right" label="操作" width="100">
+        <template>
+          <el-button type="text" size="small">修改</el-button>
+          <el-button 
+          type="text" 
+          size="small" 
+          @click.native="onRemove"
+          style="color: red;">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -46,22 +44,18 @@ export default {
   props: {
     tableData: {
       type: Array,
-      required:true
     },
     tableHead: {
       type: Array,
-    },
-    pageIndex: {
-      type: Number,
     },
   },
 
   created() {},
 
   methods: {
-    handleIndex(index) {
-      return index + 1 + (this.pageIndex - 1) * 10;
-    },
+  onRemove() {
+  console.log(this.tableData);
+  }
   },
 };
 </script>

@@ -26,7 +26,7 @@ request.interceptors.request.use(
     // console.log(data);
     //获取token
     const token = store.state.user.token.token;
-    // console.log(token);
+
     if (token) {
       if (timeout()) {
         //登录之后如果token超时那么就退出登录清除token和信息
@@ -47,9 +47,10 @@ request.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
 request.interceptors.response.use(
   (response) => {
-    // console.log(response);
+
     if (
       response.request.responseURL ===
       "http://localhost:8080/api/user-service/user/login"
@@ -66,7 +67,6 @@ request.interceptors.response.use(
     return Promise.reject(new Error(msg));
   },
   async (error) => {
-    console.dir(error);
     //如果没有错误或者response字段就中断
     if (error?.response?.status === 401) {
       Message.error("登录超时");
