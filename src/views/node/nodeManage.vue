@@ -63,6 +63,7 @@ import {
   getNodeDetialById,
   getRegionApi,
 } from "@/api";
+import { optionData } from "@/utils";
 export default {
   data() {
     return {
@@ -137,7 +138,7 @@ export default {
       this.pageInfo.totalCount = parseInt(res.totalCount);
       this.taskList = res.currentPageRecords;
       this.taskList.forEach((item) => {
-        item.addr = "1";
+        item.addr = optionData(item.addr);
       }),
         (this.loading = false);
     },
