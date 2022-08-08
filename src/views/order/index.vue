@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import pageItem from "@/components/pageIndex";
+import pageItem from "@/components/Pageindex";
 import inputForm from "./compoments/inputFrom.vue";
 import From from "./compoments/form.vue";
 import { getOrderList ,searchOrderList} from "@/api/order";
