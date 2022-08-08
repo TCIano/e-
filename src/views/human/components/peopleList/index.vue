@@ -7,28 +7,26 @@
       :tableData="peopleList"
       :tableHead="tableHead"
       @deleteListPeople="deleteListPeople"
-      @click.native="addFn"
+      :dialogTableVisible="dialogTableVisible"
     >
       <!-- 按钮 -->
-      <btn @click.native="addFn"></btn>
+      <btn @click.native="addBtn"></btn>
       <!-- //分页 -->
       <template #page>
-        <pageItem :page="pageInfo" @changePage="changePage" ></pageItem>
+        <pageItem :page="pageInfo" @changePage="changePage"></pageItem>
       </template>
     </form-item>
-
-     
   </div>
 </template>
 
 <script>
-import pageItem from "@/components/pageIndex";
-import { peopleListApi, delPeopleListApi} from "@/api/people";
+import pageItem from "@/components/Pageindex";
+import { peopleListApi, delPeopleListApi } from "@/api/people";
 import InputForm from "./compoments/input.vue";
 import FormItem from "./compoments/form.vue";
 import btn from "@/components/button";
 export default {
-  name:'peopleList',
+  name: "peopleList",
   data() {
     return {
       //表格数据
@@ -44,8 +42,6 @@ export default {
         totalCount: null,
         // userName:null//名字
       },
-
-  
 
       //表头数据
       tableHead: [
@@ -69,9 +65,8 @@ export default {
 
   created() {
     this.peopleListMd();
-    this.getywPeople()
-    this.getquyuList()
-   
+    this.getywPeople();
+    this.getquyuList();
   },
   // 弹框
   // watch: {
@@ -125,12 +120,10 @@ export default {
       this.peopleListMd(res.currentPageRecords);
     },
     // 添加
-    addFn() {
+    addBtn() {
       // console.log(11);
+      this.dialogTableVisible = true;
     },
- 
-     
-    
   },
 };
 </script>
@@ -141,5 +134,4 @@ export default {
   background-color: rgb(251, 244, 240) !important;
   color: black;
 }
-
 </style>
