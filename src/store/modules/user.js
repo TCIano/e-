@@ -40,7 +40,10 @@ export default {
     //获取用户信息
     async getUserInfo(context) {
       const res = await getUserInfo(context.state.token.userId);
+<<<<<<< HEAD
       // console.log(res);
+=======
+>>>>>>> 4d664ea341afb09eb919fff81498631db2f1207e
       context.commit("setUserInfo", res);
     },
     //退出登录

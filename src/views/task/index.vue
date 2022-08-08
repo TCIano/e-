@@ -3,7 +3,7 @@
     <input-form
       :option="option"
       @searchContionTask="searchContionTask"
-      isSingle="false"
+      isSingle="true"
     >
     </input-form>
     <form-item :tableData="taskList" :tableHead="tableHead">
@@ -42,6 +42,11 @@ export default {
         pageIndex: 1, //页数
         totalPage: null, //总页数
         totalCount: null,
+      },
+      //输入框数据
+      inputInfo: {
+        one: "78",
+        two: "89",
       },
       //表头数据
       tableHead: [
@@ -107,7 +112,7 @@ export default {
         item.createTime = item.createTime.replace(/-/g, ".");
         item.createTime = item.createTime.replace(/T/g, " ");
       });
-      console.log(res.currentPageRecords);
+      // console.log(res.currentPageRecords);
       this.pageInfo.pageIndex = parseInt(res.pageIndex);
       this.pageInfo.totalPage = parseInt(res.totalPage);
       this.pageInfo.totalCount = parseInt(res.totalCount);
@@ -116,22 +121,10 @@ export default {
     },
     //获取下一页
     async nextClick() {
-      // const res = await searchTask({
-      //   pageIndex: `${this.pageInfo.pageIndex + 1}`,
-      // });
-      // this.pageInfo.pageIndex = parseInt(res.pageIndex);
-
-      // this.taskList = res.currentPageRecords;
       this.searchTask({ pageIndex: `${this.pageInfo.pageIndex + 1}` });
     },
     //上一页
     async prevClick() {
-      // const res = await searchTask({
-      //   pageIndex: `${this.pageInfo.pageIndex - 1}`,
-      // });
-      // this.pageInfo.pageIndex = parseInt(res.pageIndex);
-
-      // this.taskList = res.currentPageRecords;
       this.searchTask({ pageIndex: `${this.pageInfo.pageIndex - 1}` });
     },
     //条件搜索 工单

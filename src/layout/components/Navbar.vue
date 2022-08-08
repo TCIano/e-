@@ -87,6 +87,7 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  z-index: 999;
   .left-logo {
     float: left;
     margin-top: 10px;

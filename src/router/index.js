@@ -131,19 +131,19 @@ export const constantRoutes = [
     children: [
       {
         path: "index",
-        component: () => import("@/views/human"),
+        component: () => import("@/views/human/components/peopleList/index"),
 
         meta: { title: "人员列表" },
       },
       {
         path: "statistic",
-        component: () => import("@/views/human"),
+        component: () => import("@/views/human/components/rxtj"),
 
         meta: { title: "人效统计" },
       },
       {
         path: "work",
-        component: () => import("@/views/human"),
+        component: () => import("@/views/human/components/gzllb"),
 
         meta: { title: "工作量列表" },
       },
