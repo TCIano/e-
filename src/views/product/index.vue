@@ -16,7 +16,7 @@
       </template>
     </form-item>
     <!-- 添加新增商品类型弹层 -->
-    <AddDept :visible="dialogVisible" :currentNode="currentNode"></AddDept>
+    <AddDept @add-success="getProduct" :visible.sync="dialogVisible" :currentNode="currentNode"></AddDept>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
           column_comment: "商品类型名称",
         },
       ],
-      currentNode: {}
+      currentNode: []
     };
   },
 
@@ -78,9 +78,13 @@ export default {
       this.getProduct({ pageIndex: `${this.pageInfo.pageIndex - 1}` });
     },
     //条件搜索 工单
-    searchContionTask(val) {
-      console.log(val);
-      this.getProduct(val);
+    async searchContionTask(val) {
+      const res = await getproductApi({
+      className: val
+      });
+      // console.log(val);
+      this.taskList = res.currentPageRecords
+      // console.log(res);
     },
     showAddDept(val) {
     this.dialogVisible = true

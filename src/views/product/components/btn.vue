@@ -16,10 +16,10 @@ export default {
 
   methods: {
   async addbtns() {
-  const res = await getproductApi();
-  this.$emit('add', res)
-  console.log(res);
-  }
+  const { currentPageRecords } = await getproductApi();
+  this.$emit('add', currentPageRecords)
+  // console.log(currentPageRecords);
+  },
   },
 };
 </script>

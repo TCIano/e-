@@ -1,14 +1,14 @@
 import request from "@/utils/request";
 
 /**
- * 获取商品列表
+ * 获取商品列表和搜索
  * @returns 
  */
 export function getproductApi(params) {
     return request({
     url: '/vm-service/skuClass/search',
     method: 'GET',
-    
+    params
     })
 }
 
