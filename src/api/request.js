@@ -8,3 +8,12 @@ export function getdetailsApi(params) {
     params
   })
 }
+
+
+export function getAreaApi(params) {
+  return request({
+    url: 'vm-service/region/search',
+    method: 'get',
+    params
+  })
+}

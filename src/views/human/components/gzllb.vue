@@ -5,7 +5,11 @@
       :option="option"
       @searchContionTask="searchContionTask"
     />
-    <inform :tableHead="tableHead" :tableData="taskList">
+    <inform
+      :tableHead="tableHead"
+      :tableData="taskList"
+      :pageIndex="pageInfo.pageIndex"
+    >
       <template v-slot:options>
         <el-button type="text" @click="onDetails">查看详情</el-button>
       </template>
@@ -17,7 +21,7 @@
         >
         </page>
       </template>
-      <getdetails :visible.sync="dialogVisible" />
+      <getdetails :visible.sync="dialogVisible" ref="detail" />
     </inform>
   </div>
 </template>
@@ -88,6 +92,7 @@ export default {
     },
     onDetails() {
       this.dialogVisible = true;
+      this.$refs.detail.getDetailsInfo();
     },
   },
 };

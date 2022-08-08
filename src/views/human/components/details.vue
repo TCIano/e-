@@ -26,6 +26,7 @@
 
 <script>
 import { getdetailsApi } from "@/api/request";
+import { getUserInfo } from "@/api/user";
 export default {
   data() {
     return {
@@ -56,12 +57,17 @@ export default {
   },
   created() {
     this.getdetails();
+    this.getDetailsInfo();
   },
 
   methods: {
     async getdetails(val) {
       const res = await getdetailsApi(val);
       console.log(res);
+    },
+    async getDetailsInfo() {
+      const res2 = await getUserInfo();
+      console.log(res2);
     },
     onClose() {
       //   console.log(111);
