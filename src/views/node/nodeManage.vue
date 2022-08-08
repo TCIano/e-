@@ -1,10 +1,6 @@
 <template>
   <div>
-    <input-form
-      isSingle="false"
-      :inputInfo="inputInfo"
-      @searchContionTask="searchContionTask"
-    >
+    <input-form :inputInfo="inputInfo" @searchContionTask="searchContionTask">
     </input-form>
 
     <form-item
@@ -61,7 +57,12 @@ import InputForm from "@/components/InputFrom";
 import FormItem from "@/components/form";
 import btn from "@/components/button";
 import PageItem from "@/components/pageItem/index.vue";
-import { delRegionApi, getNodeDetialById, getRegionApi } from "@/api";
+import {
+  delRegionApi,
+  getNodeApi,
+  getNodeDetialById,
+  getRegionApi,
+} from "@/api";
 export default {
   data() {
     return {
@@ -76,22 +77,30 @@ export default {
       },
       //输入框label
       inputInfo: {
-        one: "区域搜索",
-        two: "789",
+        one: "点位搜索",
+        two: "区域搜索",
       },
       //表头数据
       tableHead: [
         {
           column_name: "name",
-          column_comment: "区域名称",
+          column_comment: "点位名称",
         },
         {
-          column_name: "nodeCount",
-          column_comment: "点位数",
+          column_name: "region.name",
+          column_comment: "所在区域",
         },
         {
-          column_name: "remark",
-          column_comment: "备注说明",
+          column_name: "businessType.name",
+          column_comment: "商圈类型",
+        },
+        {
+          column_name: "ownerName",
+          column_comment: "合作商",
+        },
+        {
+          column_name: "addr",
+          column_comment: "详细地址",
         },
       ],
       //表单数据
@@ -117,16 +126,20 @@ export default {
   },
 
   methods: {
-    //区域列表
+    //点位列表
     async getRegion(contion) {
       this.loading = true;
-      const res = await getRegionApi(contion);
+      const res = await getNodeApi(contion);
+      //   getNodeApi()
       // console.log(res);
       this.pageInfo.pageIndex = parseInt(res.pageIndex);
       this.pageInfo.totalPage = parseInt(res.totalPage);
       this.pageInfo.totalCount = parseInt(res.totalCount);
       this.taskList = res.currentPageRecords;
-      this.loading = false;
+      this.taskList.forEach((item) => {
+        item.addr = "1";
+      }),
+        (this.loading = false);
     },
     // //获取下一页
     async nextClick() {

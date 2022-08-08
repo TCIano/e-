@@ -42,10 +42,54 @@ export const addRegionApi = (data) => {
   });
 };
 
+/**
+ *
+ * @param {String} id 当前区域id
+ * @param {Object} data
+ * regionName	string	必须		区域名称
+ * remark	string	必须		备注
+ * @returns
+ */
 export const editRegionApi = (id, data) => {
   return request({
     method: "PUT",
     url: "/vm-service/region/" + id,
+    data,
+  });
+};
+
+/**
+ *
+ * @param {String} id 当前区域id
+ * @returns
+ */
+export const delRegionApi = (id) => {
+  return request({
+    method: "DELETE",
+    url: "/vm-service/region/" + id,
+  });
+};
+
+/**
+ * 点位搜索
+ * @param {Object} params
+ * pageIndex	否
+ * pageSize	否
+ * name	否		点位名称
+ * regionId	否		区域id
+ *
+ *id	number	非必须		id
+ *name	string	非必须		名称
+ *ratio	number	非必须		分成比例
+ *contact	string	非必须		联系人
+ *phone	string	非必须		联系电话
+ *
+ * @returns
+ */
+export const getNodeApi = (params, data) => {
+  return request({
+    url: "/vm-service/node/search",
+    params,
     data,
   });
 };

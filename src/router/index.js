@@ -87,7 +87,7 @@ export const constantRoutes = [
       },
       {
         path: "node",
-        component: () => import("@/views/node"),
+        component: () => import("@/views/node/nodeManage.vue"),
         meta: { title: "点位管理" },
       },
       {
