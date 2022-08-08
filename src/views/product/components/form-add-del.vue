@@ -53,8 +53,9 @@ export default {
   created() {},
 
   methods: {
-  onRemove() {
-  console.log(this.tableData);
+  onRemove(id) {
+  console.log(id.row.classId);
+
   }
   },
 };
