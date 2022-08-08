@@ -20,7 +20,7 @@ export default {
         pageIndex: 1,
         pageSize: 10,
         totalCount: null,
-        totalPage: null,
+        totalPage: null,  
       },
       uname: "设备编号",
       List: [],
