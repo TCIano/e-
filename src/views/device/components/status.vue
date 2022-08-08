@@ -1,9 +1,15 @@
 <template>
   <div>
     <FacilityTitle :uname="uname" class="title" />
-    <Table :list="List" :sum="propertyName" @openPopup='openPopup' @currentObj="currentObj"> </Table>
+    <Table
+      :list="List"
+      :sum="propertyName"
+      @openPopup="openPopup"
+      @currentObj="currentObj"
+    >
+    </Table>
     <pageIndex :page="page" @changePage="changePage" />
-    <equipmentZT :isShow.sync='isShow' :fand='fand'/>
+    <equipmentZT :isShow.sync="isShow" :fand="fand" />
   </div>
 </template>
 
@@ -11,8 +17,8 @@
 import { getList } from "@/api";
 import FacilityTitle from "@/components/FacilityTitle";
 import Table from "@/components/Table";
-import pageIndex from "@/components/pageindex";
-import equipmentZT from '@/components/Popup/equipmentZT.vue'
+import pageIndex from "@/components/Pageindex";
+import equipmentZT from "@/components/Popup/equipmentZT.vue";
 export default {
   data() {
     return {
@@ -20,7 +26,7 @@ export default {
         pageIndex: 1,
         pageSize: 10,
         totalCount: null,
-        totalPage: null,  
+        totalPage: null,
       },
       uname: "设备编号",
       List: [],
@@ -42,8 +48,8 @@ export default {
           label: "运营状态",
         },
       ],
-      isShow:false,
-      fand:{}
+      isShow: false,
+      fand: {},
     };
   },
 
@@ -66,25 +72,25 @@ export default {
       } catch (error) {}
     },
     //下一页
-    changePage(newPage){
-      this.page.pageIndex=newPage
-      this.getList()
+    changePage(newPage) {
+      this.page.pageIndex = newPage;
+      this.getList();
     },
     //选择当前点击
-    currentObj(id){
+    currentObj(id) {
       console.log(id);
-      this.fand=id
+      this.fand = id;
       console.log(this.fand);
     },
-    openPopup(){
-      this.isShow=true
-    }
+    openPopup() {
+      this.isShow = true;
+    },
   },
   components: {
     FacilityTitle,
     Table,
     pageIndex,
-    equipmentZT
+    equipmentZT,
   },
   computed: {
     ortherList() {
