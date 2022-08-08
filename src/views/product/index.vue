@@ -2,10 +2,11 @@
   <div>
     <Inputnavbar @searchContionTask="searchContionTask"></Inputnavbar>
     <form-item
+      @Remove="getProduct"
       :tableData="taskList"
       :tableHead="tableHead"
     >
-      <btn @click="addProduct"></btn>
+      <btn @add="showAddDept"></btn>
       <template #page>
         <pagination
           :pageInfo="pageInfo"
@@ -14,6 +15,8 @@
         ></pagination>
       </template>
     </form-item>
+    <!-- 添加新增商品类型弹层 -->
+    <AddDept :visible="dialogVisible" :currentNode="currentNode"></AddDept>
   </div>
 </template>
 
@@ -22,6 +25,7 @@ import FormItem from "./components/form-add-del.vue";
 import Inputnavbar from "./components/Inputnavbar.vue";
 import btn from "./components/btn.vue";
 import pagination from "./components/pagination.vue";
+import AddDept from "./components/add-dept.vue";
 import { getproductApi } from "@/api/product";
 export default {
   components: {
@@ -29,10 +33,12 @@ export default {
     Inputnavbar,
     pagination,
     btn,
+    AddDept,
   },
   data() {
     return {
       taskList: [],
+      dialogVisible: false,
       pageInfo: {
         pageIndex: 1, //页数
         totalPage: null, //总页数
@@ -44,6 +50,7 @@ export default {
           column_comment: "商品类型名称",
         },
       ],
+      currentNode: {}
     };
   },
 
@@ -75,8 +82,9 @@ export default {
       console.log(val);
       this.getProduct(val);
     },
-    addProduct() {
-    
+    showAddDept(val) {
+    this.dialogVisible = true
+    this.currentNode = val
     }
   },
 };

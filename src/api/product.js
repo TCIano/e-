@@ -13,7 +13,7 @@ export function getproductApi(params) {
 }
 
 //修改
-export function addProductApi(params) {
+export function setProductApi(params) {
     return request({
     url: '/vm-service/skuClass/:classId',
     method: 'PUT',
@@ -29,8 +29,22 @@ export function addProductApi(params) {
  */
 export function delProductApi(id) {
     return request({
-    url: '/vm-service/skuClass' + id,
+    url: '/vm-service/skuClass/' + id,
     method: 'DELETE',
     
+    })
+}
+
+//新增
+/**
+ * 新增商品类型
+ * @param {String} data 传递商品类型名
+ * @returns promise
+ */
+export function addProductApi(data) {
+    return request({
+    url: '/vm-service/skuClass',
+    method: 'POST',
+    data
     })
 }

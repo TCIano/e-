@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { delProductApi } from '@/api/product'
 export default {
   data() {
     return {
@@ -53,9 +54,18 @@ export default {
   created() {},
 
   methods: {
-  onRemove(id) {
-  console.log(id.row.classId);
-
+  async onRemove(id) {
+    try {
+        await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+          console.log('点击确定删除');
+          await delProductApi(id.row.classId)
+          this.$message.success('删除成功')
+          this.$emit('Remove')
+    } catch (error) {}
   }
   },
 };

@@ -1,8 +1,12 @@
 <template>
-  <el-button type="primary" icon="el-icon-plus" @click="open">新建</el-button>
+  <el-button 
+  type="primary" 
+  @click.native="addbtns"
+  icon="el-icon-plus">新建</el-button>
 </template>
 
 <script>
+import { getproductApi } from "@/api/product";
 export default {
   data() {
     return {};
@@ -11,12 +15,11 @@ export default {
   created() {},
 
   methods: {
-    open() {
-      this.$prompt("商品类型名称:", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-      });
-    },
+  async addbtns() {
+  const res = await getproductApi();
+  this.$emit('add', res)
+  console.log(res);
+  }
   },
 };
 </script>
