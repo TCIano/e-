@@ -2,7 +2,6 @@
   <div>
     <inputForm :inputInfo="inputInfo" @searchContionTask="searchContionTask" />
     <btn />
-
     <el-button type="primary" class="setting" @click="upFn">导入数据</el-button>
     <inform
       :tableHead="tableHead"
