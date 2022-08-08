@@ -13,30 +13,27 @@
       <btn @click.native="addFn"></btn>
       <!-- //分页 -->
       <template #page>
-        <pageItem :page="pageInfo" @changePage="changePage" ></pageItem>
+        <pageItem :page="pageInfo" @changePage="changePage"></pageItem>
       </template>
     </form-item>
-
-     
   </div>
 </template>
 
 <script>
-import pageItem from "@/components/pageIndex";
-import { peopleListApi, delPeopleListApi} from "@/api/people";
+import pageItem from "@/components/Pageindex";
+import { peopleListApi, delPeopleListApi } from "@/api/people";
 import InputForm from "./compoments/input.vue";
 import FormItem from "./compoments/form.vue";
 import btn from "@/components/button";
 export default {
-  name:'peopleList',
+  name: "peopleList",
   data() {
     return {
       //表格数据
       peopleList: [],
       // 负责区域
-      quyuList:[],
-      
-      
+      quyuList: [],
+
       // 分页
       pageInfo: {
         pageIndex: 1, //页数
@@ -44,8 +41,6 @@ export default {
         totalCount: null,
         // userName:null//名字
       },
-
-  
 
       //表头数据
       tableHead: [
@@ -69,9 +64,8 @@ export default {
 
   created() {
     this.peopleListMd();
-    this.getywPeople()
-    this.getquyuList()
-   
+    this.getywPeople();
+    this.getquyuList();
   },
   // 弹框
   // watch: {
@@ -128,9 +122,6 @@ export default {
     addFn() {
       // console.log(11);
     },
- 
-     
-    
   },
 };
 </script>
@@ -141,5 +132,4 @@ export default {
   background-color: rgb(251, 244, 240) !important;
   color: black;
 }
-
 </style>
