@@ -1,6 +1,13 @@
 import request from '@/utils/request'
 
-
+/**
+ * 获取用户工作量(工单统计)
+ * @param {*} params 
+ * userId   当前行id
+ * start 示例  2020-10-01 00:00:00
+ * end 示例  2020-10-31 00:00:00
+ * @returns 
+ */
 export function getdetailsApi(params) {
   return request({
     url: 'task-service/task/userWork',

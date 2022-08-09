@@ -112,11 +112,9 @@
       </div>
 
       <!-- //分页 -->
-        <pageItem
-          :pageInfo="pageInfo"
-          @prevClick="prevClick"
-          @nextClick="nextClick"
-        ></pageItem>
+        <!-- <pageItem
+          :page="pageInfo" @changePage="changePage"
+        ></pageItem> -->
       
     </el-dialog>
     
@@ -127,7 +125,7 @@
 </template>
 
 <script>
-import pageItem from "@/components/pageItem";
+// import pageItem from "@/components/pageIndex";
 import btn from "@/components/button";
 import { lookPolicyApi } from '@/api/policy'
 export default {
@@ -163,7 +161,7 @@ export default {
   },
   components: {
     btn,
-    pageItem
+    // pageItem9`
   },
   props: {
     tableData: {
@@ -207,33 +205,32 @@ export default {
     // 查看详情
    async details(val) {
     this.visible = true
-        console.log(val);
+        // console.log(val);
         this.clickeditlist = val
-        const res = await lookPolicyApi(this.clickeditlist.policyId)
+        console.log(this.clickeditlist.policyId);
+        const res = await lookPolicyApi(this.clickeditlist.policyId,val)
         // console.log(res);
 
-        this.pageInfo.pageIndex = parseInt(res.pageIndex);
-      this.pageInfo.totalPage = parseInt(res.totalPage);
-      this.pageInfo.totalCount = parseInt(res.totalCount);
+      //   this.pageInfo.pageIndex = parseInt(res.pageIndex);
+      // this.pageInfo.totalPage = parseInt(res.totalPage);
+      // this.pageInfo.totalCount = parseInt(res.totalCount);
 
         this.dialogList = res.currentPageRecords
         console.log(this.dialogList);
 
     },
+  // // 切换分页
+  //   changePage(newPage) {
+  //     this.pageInfo.pageIndex = newPage;
+  //     this.details();
+  //   },
 
     //关闭弹窗
     handleClose() {
       this.visible = false
     },
 
-      //获取下一页
-     nextClick() {
-      this.details({ pageIndex: `${this.pageInfo.pageIndex + 1}` });
-    },
-    //上一页
-     prevClick() {
-      this.details({ pageIndex: `${this.pageInfo.pageIndex - 1}` });
-    },
+ 
 
 
   },

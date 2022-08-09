@@ -33,7 +33,7 @@ export default {
       peopleList: [],
       // 负责区域
       quyuList:[],
-      
+      dialogTableVisible:false,
       
       // 分页
       pageInfo: {

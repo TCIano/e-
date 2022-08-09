@@ -21,7 +21,7 @@
         >
         </page>
       </template>
-      <getdetails :visible.sync="dialogVisible" ref="detail" />
+      <getdetails :visible.sync="dialogVisible" ref="detail" :taskList="taskList" :userId="userId"/>
     </inform>
   </div>
 </template>
@@ -57,6 +57,7 @@ export default {
         totalPage: null,
         totalCount: null,
       },
+      userId:'1'
     };
   },
 
@@ -96,6 +97,7 @@ export default {
       // console.log(res);
     },
     onDetails(val) {
+      this.userId = val.scope.row.userId.toString()
       // console.log(val.scope.row.userId);
       this.dialogVisible = true;
       const id = val.scope.row.userId;
