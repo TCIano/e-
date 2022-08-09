@@ -5,9 +5,13 @@
       :option="option"
       @searchContionTask="searchContionTask"
     />
-    <inform :tableHead="tableHead" :tableData="taskList">
-      <template v-slot:options>
-        <el-button type="text" @click="onDetails">查看详情</el-button>
+    <inform
+      :tableHead="tableHead"
+      :tableData="taskList"
+      :pageIndex="pageInfo.pageIndex"
+    >
+      <template v-slot:options="scope">
+        <el-button type="text" @click="onDetails(scope)">查看详情</el-button>
       </template>
       <template v-slot:page>
         <page
@@ -17,14 +21,14 @@
         >
         </page>
       </template>
-      <getdetails :visible.sync="dialogVisible" />
+      <getdetails :visible.sync="dialogVisible" ref="detail" />
     </inform>
   </div>
 </template>
 
 <script>
-import inputForm from "@/components/InputFrom/index.vue";
-import btn from "@/components/button/index.vue";
+import { getSearchApi } from "@/api/request";
+import inputForm from "@/components/InputFrom";
 import inform from "@/components/form/index.vue";
 import page from "@/components/pageItem/index.vue";
 import getdetails from "./details.vue";
@@ -34,6 +38,7 @@ export default {
     return {
       dialogVisible: false,
       taskList: [],
+      // id: null,
       inputInfo: {
         one: "人员搜索",
         two: "角色",
@@ -57,7 +62,6 @@ export default {
 
   components: {
     inputForm,
-    btn,
     inform,
     page,
     getdetails,
@@ -82,12 +86,21 @@ export default {
     nextClick() {
       this.getuserwork({ pageIndex: `${this.pageInfo.pageIndex + 1}` });
     },
-    searchContionTask(val) {
-      console.log(val);
-      this.getuserwork(val);
+    async searchContionTask(val) {
+      const res = await getSearchApi({
+        userName: val.userName,
+        isRepair: val.status === "运营员" ? false : true,
+      });
+      console.log(res);
+      this.taskList = res.currentPageRecords;
+      // console.log(res);
     },
-    onDetails() {
+    onDetails(val) {
+      // console.log(val.scope.row.userId);
       this.dialogVisible = true;
+      const id = val.scope.row.userId;
+      this.$refs.detail.getDetailsInfo(id);
+      // console.log(val.scope.$index);
     },
   },
 };
