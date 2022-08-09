@@ -94,6 +94,8 @@ export default {
         } else {
           item.status = "出货失败";
         }
+         item.createTime = item.createTime.replace(/-/g, ".");
+        item.createTime = item.createTime.replace(/T/g, " ");
       });
       this.pageIndex = res.pageIndex;
       this.pageSize = res.pageSize;

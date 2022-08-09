@@ -73,6 +73,11 @@ export default {
 
         const res =  await searchOrderList(this.form)
         console.log(res);
+        res.currentPageRecords.forEach((item) => {
+        
+        item.createTime = item.createTime.replace(/-/g, ".");
+        item.createTime = item.createTime.replace(/T/g, " ");
+      });
          this.orderList = res.currentPageRecords;
     },
     
