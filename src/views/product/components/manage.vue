@@ -3,7 +3,7 @@
     <inputForm :inputInfo="inputInfo" @searchContionTask="searchContionTask" />
     <btn @click.native="addFn" />
     <el-button type="primary" class="setting" @click="upFn">导入数据</el-button>
-    <addContent :visible.sync="addVisible" />
+    <addContent :visible.sync="addVisible" @addsuccess="getmanageproduct" />
     <inform
       :tableHead="tableHead"
       :tableData="productList"

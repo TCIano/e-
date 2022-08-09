@@ -51,5 +51,13 @@ export function getProductTypeApi() {
     })
 }
 
+export function addProductFnApi(data) {
+    return request({
+        url:'/vm-service/sku',
+      method: 'POST',
+      data
+    })
+}
+
 
 // 商品管理-end
