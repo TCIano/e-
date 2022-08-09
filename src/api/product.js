@@ -44,6 +44,12 @@ export function manageProductApi(params) {
     })
 }
 
+export function getProductTypeApi() {
+    return request({
+        url:'/vm-service/skuClass/search',
+      
+    })
+}
 
 
 // 商品管理-end

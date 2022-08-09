@@ -15,9 +15,9 @@
         width="100%"
       >
       </el-table-column>
-      <el-table-column label="商品图片">
-        <template>
-          <slot name="image"></slot>
+      <el-table-column label="商品图片" prop="skuImage">
+        <template slot-scope="scope">
+          <slot name="image" :scope="scope"></slot>
           <!-- <el-button @>jianji</el-button> -->
         </template>
       </el-table-column>

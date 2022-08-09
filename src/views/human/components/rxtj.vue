@@ -163,6 +163,7 @@ export default {
     async getArea(val) {
       const res = await getAreaApi(val);
       console.log(res);
+      res.pageSize = 200;
       this.arr = res.currentPageRecords;
       // this.pageInfo.pageIndex = parseInt(res.pageIndex);
     },

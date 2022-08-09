@@ -1,22 +1,17 @@
 <template>
   <div>
     <inputForm :inputInfo="inputInfo" @searchContionTask="searchContionTask" />
-    <btn />
+    <btn @click.native="addFn" />
     <el-button type="primary" class="setting" @click="upFn">导入数据</el-button>
-
+    <addContent :visible.sync="addVisible" />
     <inform
       :tableHead="tableHead"
       :tableData="productList"
       :pageIndex="pageInfo.pageIndex"
     >
       <getupdate :visible.sync="dialogVisible" />
-      <template v-slot:image>
-        <el-avatar
-          size="medium"
-          v-for="item in productList"
-          :key="item.skuId"
-          :src="item.skuImage"
-        ></el-avatar>
+      <template v-slot:image="{ scope }">
+        <el-avatar size="medium" :src="scope.row.skuImage"></el-avatar>
       </template>
       <template v-slot:options="scope">
         <el-button type="text" @click="editFn(scope)">修改</el-button>
@@ -28,6 +23,7 @@
 </template>
 
 <script>
+import addContent from "./addcontent.vue";
 import inputForm from "./Inputsearch.vue";
 import btn from "@/components/button";
 import inform from "./form/index.vue";
@@ -39,6 +35,8 @@ export default {
     return {
       productList: [],
       dialogVisible: false,
+      editVisible: false,
+      addVisible: false,
       pageInfo: {
         pageIndex: 1,
         totalPage: null,
@@ -65,6 +63,7 @@ export default {
     inform,
     page,
     getupdate,
+    addContent,
   },
 
   created() {
@@ -102,7 +101,10 @@ export default {
       console.log(res);
     },
     editFn() {
-      this.dialogVisible = true;
+      this.editVisible = true;
+    },
+    addFn() {
+      this.addVisible = true;
     },
   },
 };
