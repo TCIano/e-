@@ -1,9 +1,9 @@
 <template>
   <div>
     <input-form
+      isSingle="false"
       :inputInfo="inputInfo"
       @searchContionTask="searchContionTask"
-      :option="option"
     >
     </input-form>
 
@@ -16,6 +16,9 @@
       <!-- 新建 -->
       <btn @click.native="createRegion"></btn>
       <template #options="scope">
+        <el-button type="text" size="mini" @click="reset(scope)"
+          >重置密码</el-button
+        >
         <el-button type="text" size="mini" @click="showDetail(scope)"
           >查看详情</el-button
         >
@@ -54,22 +57,21 @@
 </template>
 
 <script>
-import editAdd from "./components/nodeCom/editAdd.vue";
-import regionDetail from "./components/nodeCom/regionDetail.vue";
+import editAdd from "./components/businessCom/editAdd.vue";
+import regionDetail from "./components/businessCom/regionDetail.vue";
 import pageItem from "@/components/pageItem";
 import InputForm from "@/components/InputFrom";
 import FormItem from "@/components/form";
 import btn from "@/components/button";
 import PageItem from "@/components/pageItem/index.vue";
 import {
-  delNodeApi,
+  delPartnerApi,
   delRegionApi,
-  getNodeApi,
   getNodeDetialById,
   getRegionApi,
-  nodeDetailApi,
+  resetPassApi,
+  searchPartnerApi,
 } from "@/api";
-import { optionData } from "@/utils";
 export default {
   data() {
     return {
@@ -84,41 +86,42 @@ export default {
       },
       //输入框label
       inputInfo: {
-        one: "点位搜索",
-        two: "区域搜索",
+        one: "合作商搜索",
       },
       //表头数据
       tableHead: [
         {
           column_name: "name",
-          column_comment: "点位名称",
+          column_comment: "合作商名称",
         },
         {
-          column_name: "region.name",
-          column_comment: "所在区域",
+          column_name: "account",
+          column_comment: "账号",
         },
         {
-          column_name: "businessType.name",
-          column_comment: "商圈类型",
+          column_name: "vmCount",
+          column_comment: "设备数量",
         },
         {
-          column_name: "ownerName",
-          column_comment: "合作商",
+          column_name: "ratio",
+          column_comment: "分成比例",
         },
         {
-          column_name: "addr",
-          column_comment: "详细地址",
+          column_name: "contact",
+          column_comment: "联系人",
+        },
+        {
+          column_name: "mobile",
+          column_comment: "联系电话",
         },
       ],
       //表单数据
       taskList: [],
       //当前点击id
-      currentDetail: "",
+      currentDetail: {},
       //当前点位
       currentNode: [],
       isEdit: true, //是否为 编辑
-      //多选框内容
-      option: [],
     };
   },
   components: {
@@ -135,29 +138,20 @@ export default {
   },
 
   methods: {
-    //点位列表
+    //区域列表
     async getRegion(contion) {
       this.loading = true;
-      const res = await getNodeApi(contion);
-      const region = await getRegionApi({
-        pageIndex: "1",
-        pageSize: "100000",
+      const res = await searchPartnerApi({
+        pageIndex: this.pageInfo.pageIndex,
+        pageSize: 10,
+        name: contion,
       });
-      // console.log(region);
-      region.currentPageRecords.forEach((item) => (item.label = item.name));
-      this.option = region.currentPageRecords;
-      // console.log(this.option);
-      //传递给输入框数据
-      //   getNodeApi()
       // console.log(res);
       this.pageInfo.pageIndex = parseInt(res.pageIndex);
       this.pageInfo.totalPage = parseInt(res.totalPage);
       this.pageInfo.totalCount = parseInt(res.totalCount);
-      const list = res.currentPageRecords;
-      list.forEach((item) => {
-        item.addr = optionData(item.addr);
-      }),
-        (this.taskList = list);
+      this.taskList = res.currentPageRecords;
+      this.taskList.forEach((item) => (item.ratio = item.ratio + "%"));
       this.loading = false;
     },
     // //获取下一页
@@ -170,40 +164,18 @@ export default {
     },
     //条件搜索
     searchContionTask(val) {
-      console.log(val);
       const name = val.taskCode;
-      const regionId = val.status;
       // console.log(name);
-      this.getRegion({
-        name,
-        regionId,
-      });
+      this.getRegion(name);
     },
     //区域详情
     async showDetail({ scope }) {
-      console.log(scope.row);
+      // console.log(scope);
       this.visible = true;
-      // 拿到当前索引
-      this.currentDetail = scope.row.id;
-      //通过id拿到点位信息
 
-      const res = await nodeDetailApi(this.currentDetail);
-
-      this.currentNode = res;
-      this.currentNode.forEach((item) => {
-        if (item.vmStatus === 0) {
-          item.vmStatus = "未投放";
-        } else if (item.vmStatus === 1) {
-          item.vmStatus = "运营";
-        } else if (item.vmStatus === 3) {
-          item.vmStatus = "撤机";
-        } else {
-          item.vmStatus = "未知状态";
-        }
-        item.lastSupplyTime = item.lastSupplyTime.replace(/-/g, ".");
-        item.lastSupplyTime = item.lastSupplyTime.replace(/T/g, " ");
-      });
-      console.log(this.currentNode);
+      // console.log(res);
+      this.currentNode = scope.row;
+      // console.log(this.currentNode);
     },
     //新建
     createRegion() {
@@ -212,25 +184,23 @@ export default {
     //编辑
     editRegion({ scope }) {
       this.eAvisible = true;
+      // console.log(scope);
       // 拿到当前索引
+      // console.log(this.taskList[scope.$index]);
       const currentDetail = scope.row;
-
-      // console.log(currentDetail);
       // 变为编辑状态;
+      console.log(this.$refs.editInfo);
       const ruleForm = {};
       ruleForm.id = currentDetail.id;
       ruleForm.name = currentDetail.name;
-      ruleForm.addr = currentDetail.addr;
-      ruleForm.regionId = currentDetail.regionId;
-      ruleForm.businessId = currentDetail.businessId;
-      ruleForm.ownerName = currentDetail.ownerName;
-      ruleForm.ownerId = currentDetail.ownerId;
-      ruleForm.areaCode = currentDetail.areaCode;
-      ruleForm.createUserId = currentDetail.createUserId;
-
+      ruleForm.account = currentDetail.account;
+      ruleForm.password = currentDetail.password;
+      ruleForm.ratio = currentDetail.ratio;
+      ruleForm.contact = currentDetail.contact;
+      ruleForm.phone = currentDetail.phone;
+      ruleForm.mobile = currentDetail.mobile;
       // console.log(ruleForm);
-      // const index = scope.$index;
-      this.$refs.editInfo.getIptValue(ruleForm, scope.row);
+      this.$refs.editInfo.getIptValue(ruleForm);
     },
     //删除
     delRegion({ scope }) {
@@ -242,7 +212,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       }).then(async () => {
-        await delNodeApi(scope.row.id);
+        await delPartnerApi(scope.row.id);
         this.$message({
           type: "success",
           message: "删除成功!",
@@ -250,6 +220,28 @@ export default {
         //更新数据
         this.getRegion();
       });
+    },
+    //重置密码
+    reset({ scope }) {
+      this.$confirm("即将重置密码, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(async () => {
+          await resetPassApi(scope.row.id);
+          this.$message({
+            type: "success",
+            message: "重置成功!",
+          });
+          this.getRegion();
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "重置失败",
+          });
+        });
     },
   },
 };
