@@ -17,7 +17,7 @@
 import { getList } from "@/api";
 import FacilityTitle from "@/components/FacilityTitle";
 import Table from "@/components/Table";
-import pageIndex from "@/components/pageIndex";
+import pageIndex from "@/components/Pageindex";
 import equipmentZT from "@/components/Popup/equipmentZT.vue";
 import equipmentZT from "@/components/Popup/equipmentZT.vue";
 
