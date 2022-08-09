@@ -163,7 +163,7 @@ export const constantRoutes = [
       },
       {
         path: "manage",
-        component: () => import("@/views/product"),
+        component: () => import("@/views/product/components/manage"),
 
         meta: { title: "商品管理" },
       },

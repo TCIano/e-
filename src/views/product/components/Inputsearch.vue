@@ -2,11 +2,11 @@
   <div class="search">
     <el-form :inline="true" class="demo-form-inline">
       <!-- <slot></slot> -->
-      
-      <el-form-item label="商品类型搜索:">
+
+      <el-form-item label="商品搜索:">
         <el-input
           placeholder="请输入"
-          v-model="searchContion.value"
+          v-model="searchContion.taskCode"
         ></el-input>
       </el-form-item>
 
@@ -14,7 +14,7 @@
         <el-button
           type="primary"
           icon="el-icon-search"
-          @click.native="$emit('searchContionTask', searchContion.value)"
+          @click.native="$emit('searchContionTask', searchContion)"
           >查询</el-button
         >
       </el-form-item>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       searchContion: {
-        value: "",
+        taskCode: "",
       },
     };
   },

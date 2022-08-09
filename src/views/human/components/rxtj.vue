@@ -120,11 +120,13 @@
                 全部<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>黄金糕</el-dropdown-item>
-                <el-dropdown-item>狮子头</el-dropdown-item>
-                <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-                <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+                <div style="height: 300px" class="scrollbar">
+                  <el-scrollbar style="height: 100%">
+                    <el-dropdown-item v-for="(item, index) in arr" :key="index">
+                      {{ item.name }}
+                    </el-dropdown-item>
+                  </el-scrollbar>
+                </div>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -139,18 +141,36 @@
 </template>
 
 <script>
+import { getAreaApi } from "@/api/request";
 export default {
   data() {
     return {
+      arr: [],
       value: "",
       radio1: "周",
       radio2: "运营人员",
+      // pageInfo: {
+      //   pageIndex: 1,
+      // },
     };
   },
 
-  created() {},
+  created() {
+    this.getArea();
+  },
 
-  methods: {},
+  methods: {
+    async getArea(val) {
+      const res = await getAreaApi(val);
+      console.log(res);
+      res.pageSize = 200;
+      this.arr = res.currentPageRecords;
+      // this.pageInfo.pageIndex = parseInt(res.pageIndex);
+    },
+    // onScroll() {
+    //   this.getArea({ pageIndex: `${this.pageInfo.pageIndex + 1}` });
+    // },
+  },
 };
 </script>
 
@@ -284,5 +304,20 @@ export default {
   color: #91a7dc;
   line-height: 17px;
   margin-left: 50px;
+}
+
+.scrollbar {
+  white-space: nowrap;
+}
+.el-scrollbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+.el-scrollbar__wrap {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 110%;
+  height: 100%;
 }
 </style>
