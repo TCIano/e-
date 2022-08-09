@@ -19,7 +19,6 @@ import FacilityTitle from "@/components/FacilityTitle";
 import Table from "@/components/Table";
 import pageIndex from "@/components/pageIndex";
 import equipmentZT from "@/components/Popup/equipmentZT.vue";
-import equipmentZT from "@/components/Popup/equipmentZT.vue";
 
 export default {
   data() {
