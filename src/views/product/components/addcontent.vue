@@ -9,7 +9,7 @@
       <el-form
         label-width="100px"
         label-position="right"
-        :model="formData"
+        :model="form"
         :rules="formRules"
         ref="form"
       >
@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { getProductTypeApi } from "@/api/product";
+import { getProductTypeApi, addProductFnApi } from "@/api/product";
 // import { Pictuce, NewVendingMachines, iseditVendingMachine } from "@/api";
 export default {
   name: "addContent",
@@ -132,12 +132,13 @@ export default {
           { required: true, message: "请输入商品价格", trigger: "change" },
         ],
         producttype: [
-          { required: true, message: "请选择商品类型", trigger: "blur" },
+          { required: true, message: "请选择商品类型", trigger: "change" },
         ],
         productsize: [
           { required: true, message: "请输入商品规格", trigger: "blur" },
         ],
       },
+      imageUrl: "",
     };
   },
 
@@ -146,40 +147,40 @@ export default {
   },
 
   methods: {
-    // handleChange(value) {
-    //   //   console.log(value);
-    // },
-    // async handleAvatarSuccess(file) {
-    //   const formData = new FormData();
-    //   formData.append("fileName", file.file);
-    //   //   console.log(file.file);
-    //   const res = await Pictuce(formData);
-    //   console.log(res);
-    //   this.form.image = res;
-    // },
+    handleChange(value) {
+      //   console.log(value);
+    },
+    async handleAvatarSuccess(file) {
+      const formData = new FormData();
+      formData.append("fileName", file.file);
+      //   console.log(file.file);
+      const res = await Pictuce(formData);
+      console.log(res);
+      this.form.image = res;
+    },
 
-    // async handleAvatarSuccess(res, file) {
-    //   this.fileName = URL.createObjectURL(file.raw);
-    //   console.log(this.fileName);
+    async handleAvatarSuccess(res, file) {
+      this.fileName = URL.createObjectURL(file.raw);
+      console.log(this.fileName);
 
-    //   const data = await Pictuce({
-    //     fileName: this.fileName,
-    //   });
-    //   console.log(data);
-    //   // console.log(res);
-    // },
-    // beforeAvatarUpload(file) {
-    //   const isJPG = file.type === "image/jpeg";
-    //   const isLt2M = file.size / 1024 / 1024 < 2;
+      const data = await Pictuce({
+        fileName: this.fileName,
+      });
+      console.log(data);
+      // console.log(res);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
 
-    //   if (!isJPG) {
-    //     this.$message.error("上传头像图片只能是 JPG 格式!");
-    //   }
-    //   if (!isLt2M) {
-    //     this.$message.error("上传头像图片大小不能超过 2MB!");
-    //   }
-    //   return isJPG && isLt2M;
-    // },
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
     // async send() {
     //   if (this.form.typeId) {
     //     await iseditVendingMachine(this.fand.typeId, this.form);
@@ -205,10 +206,20 @@ export default {
       this.$emit("update:visible", false);
     },
     async onConfirm() {
-      this.$emit("update:visible", false);
       //   this.$refs.upload.submit();
       await this.$refs.form.validate();
       console.log("表单校验成功");
+      console.log(this.form);
+      try {
+        const res = await addProductFnApi(this.form);
+        this.producttypeList = res.currentPageRecords;
+        this.$message.success("新增部门成功");
+      } catch (err) {
+        this.$message.success("新增部门失败");
+        console.dir(err);
+      }
+      this.onClose();
+      this.$emit("addsuccess");
     },
     async getProductType() {
       const res = await getProductTypeApi();
