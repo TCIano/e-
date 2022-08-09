@@ -3,7 +3,8 @@
     <inputForm :inputInfo="inputInfo" @searchContionTask="searchContionTask" />
     <btn @click.native="addFn" />
     <el-button type="primary" class="setting" @click="upFn">导入数据</el-button>
-    <addContent :visible.sync="addVisible" @addsuccess="getmanageproduct" />
+    <addContent :visible.sync="addVisible" />
+
     <inform
       :tableHead="tableHead"
       :tableData="productList"
@@ -19,11 +20,18 @@
     </inform>
     <page :pageInfo="pageInfo" @prevClick="prevClick" @nextClick="nextClick">
     </page>
+      <!-- 编辑弹窗 -->
+    <editContent   :visible.sync="editVisible" :scopeRow="scopeRow"/> 
+  <!-- /弹窗 -->
   </div>
+
+  <!-- 商品管理主页 -->
+
 </template>
 
 <script>
 import addContent from "./addcontent.vue";
+import editContent from './editDialog.vue'
 import inputForm from "./Inputsearch.vue";
 import btn from "@/components/button";
 import inform from "./form/index.vue";
@@ -34,8 +42,9 @@ export default {
   data() {
     return {
       productList: [],
+      scopeRow:{},
       dialogVisible: false,
-      editVisible: false,
+      editVisible: true,
       addVisible: false,
       pageInfo: {
         pageIndex: 1,
@@ -64,6 +73,7 @@ export default {
     page,
     getupdate,
     addContent,
+    editContent
   },
 
   created() {
@@ -100,7 +110,9 @@ export default {
       this.productList = res.currentPageRecords;
       console.log(res);
     },
-    editFn() {
+    editFn(val) {
+      console.log(val.scope.row);
+      this.scopeRow = val.scope.row;
       this.editVisible = true;
     },
     addFn() {

@@ -36,10 +36,10 @@
             v-model="form.price"
             style="width: 358px"
             controls-position="right"
-            @change="handleChange"
+            
             :min="0"
             :precision="2"
-            :step="0.01"
+            :step="1"
           ></el-input-number
         ></el-form-item>
         <el-form-item prop="producttype">
@@ -96,10 +96,10 @@
 </template>
 
 <script>
-import { getProductTypeApi, addProductFnApi,getUserServeFileUploadApi } from "@/api/product";
-// import { Pictuce, NewVendingMachines, iseditVendingMachine } from "@/api";
+import { getProductTypeApi,getUserServeFileUploadApi,editProductshopping } from "@/api/product";
+
 export default {
-  name: "addContent",
+  name: "editContent",
   data() {
     return {
       producttypeList: [],
@@ -132,14 +132,11 @@ export default {
   },
 
   created() {
-    this.getProductType();
+    this.getProductType();   
   },
 
   methods: {
     
-    handleChange(value) {
-      //   console.log(value);
-    },
     // 图片上传
     async handleAvatarSuccess(file) {
       console.log(file);
@@ -153,27 +150,29 @@ export default {
     },
    
     onClose() {
-      //   console.log(111);
       this.$emit("update:visible", false);
     },
+
     // 确认按钮
     async onConfirm() {
       
       await this.$refs.form.validate();
-    const res =  await addProductFnApi ({
+
+    const res =  await editProductshopping (this.scopeRow.skuId,{
       skuName:this.form.name,
       brandName:this.form.brandName,
       price:this.form.price,
       unit:this.form.productsize,
       classId:this.form.producttype,
-      skuImage:this.imageUrl
+      skuImage:this.imageUrl,
+      skuId:this.scopeRow.skuId
     })
+    
     console.log(res);
-     
-     
       this.onClose();
       this.$emit("addsuccess");
     },
+
     // 新建里的商品类型
     async getProductType() {
       const res = await getProductTypeApi();
@@ -188,7 +187,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    fand: {
+    scopeRow: {
       type: Object,
     },
   },
