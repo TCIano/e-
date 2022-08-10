@@ -24,6 +24,7 @@ import { getList, souList } from "@/api";
 import FacilityTitle from "@/components/FacilityTitle";
 import Table from "@/components/Table";
 import pageIndex from "@/components/Pageindex";
+
 import equipmentZT from "@/components/Popup/equipmentZT.vue";
 export default {
   data() {
