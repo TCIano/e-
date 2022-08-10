@@ -7,3 +7,4 @@ export * from "./facility";
 export * from "./node";
 
 export * from "./workOrder";
+export * from "./humanTask";

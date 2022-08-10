@@ -8,26 +8,26 @@
             <el-row :gutter="20">
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
+                  <div class="num">{{ humanInfo[0].total }}</div>
                   <div class="text">工单总数（个）</div>
                 </div>
               </el-col>
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
-                  <div class="text">工单总数（个）</div>
+                  <div class="num">{{ humanInfo[0].completedTotal }}</div>
+                  <div class="text">完成工单（个）</div>
                 </div></el-col
               >
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
-                  <div class="text">工单总数（个）</div>
+                  <div class="num">{{ humanInfo[0].cancelTotal }}</div>
+                  <div class="text">拒绝工单（个）</div>
                 </div></el-col
               >
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
-                  <div class="text">工单总数（个）</div>
+                  <div class="num">{{ humanInfo[0].workerCount }}</div>
+                  <div class="text">运营人员（个）</div>
                 </div></el-col
               >
             </el-row>
@@ -41,26 +41,26 @@
             <el-row :gutter="20">
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
+                  <div class="num">{{ humanInfo[1].total }}</div>
                   <div class="text">工单总数（个）</div>
                 </div>
               </el-col>
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
-                  <div class="text">工单总数（个）</div>
+                  <div class="num">{{ humanInfo[1].completedTotal }}</div>
+                  <div class="text">完成工单（个）</div>
                 </div></el-col
               >
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
-                  <div class="text">工单总数（个）</div>
+                  <div class="num">{{ humanInfo[1].cancelTotal }}</div>
+                  <div class="text">拒绝工单（个）</div>
                 </div></el-col
               >
               <el-col :span="6">
                 <div class="grid-content">
-                  <div class="num">1</div>
-                  <div class="text">工单总数（个）</div>
+                  <div class="num">{{ humanInfo[1].workerCount }}</div>
+                  <div class="text">运维人员（个）</div>
                 </div></el-col
               >
             </el-row>
@@ -141,7 +141,9 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 import { getAreaApi } from "@/api/request";
+import { TaskInfoApi } from "@/api";
 export default {
   data() {
     return {
@@ -152,11 +154,13 @@ export default {
       // pageInfo: {
       //   pageIndex: 1,
       // },
+      humanInfo: [],
     };
   },
 
   created() {
     this.getArea();
+    this.getHumanInfo();
   },
 
   methods: {
@@ -170,6 +174,16 @@ export default {
     // onScroll() {
     //   this.getArea({ pageIndex: `${this.pageInfo.pageIndex + 1}` });
     // },
+
+    //人员统计头部信息
+    async getHumanInfo() {
+      const nowDate = Date.now();
+      const data = dayjs(nowDate).format("YYYY-MM-DD");
+
+      const res = await TaskInfoApi(data + " 00:00:00", data + " 23:59:59");
+      // console.log(res);
+      this.humanInfo = res;
+    },
   },
 };
 </script>
