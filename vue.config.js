@@ -14,7 +14,7 @@ const name = defaultSettings.title || "vue Admin Template"; // page title
 // You can change the port by the following methods:
 // port = 9528 npm run dev OR npm run dev --port = 9528
 const port = process.env.port || process.env.npm_config_port || 8080; // dev port
-
+const timeStamp = new Date().getTime();
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
   css: {
@@ -56,8 +56,20 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: "./",
+  // publicPath: "./",
   // assetsPublicPath: "./",
+  publicPath: "./",
+  configureWebpack: {
+    // webpack 配置
+    output: {
+      // 把应用打包成umd库格式
+      library: "myLibrary",
+      // 输出重构  打包编译后的文件名称  【模块名称.时间戳】
+      filename: `[name].${timeStamp}.js`,
+      libraryTarget: "umd",
+      globalObject: "this",
+    },
+  },
   outputDir: "dist",
   assetsDir: "static",
   lintOnSave: process.env.NODE_ENV === "development",

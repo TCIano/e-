@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import { imageCode } from "@/api";
 export default {
   data() {
     return {

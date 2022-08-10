@@ -4,7 +4,7 @@ import { setTokenTime } from "@/utils/auth";
 export default {
   namespaced: true,
   state: {
-    token: "",
+    token: {},
     // errToken: "",
     userInfo: {},
   },
@@ -24,7 +24,7 @@ export default {
       // console.log(res);
       // console.log(res.request.responseURL);
       // console.log(this);
-      if (res.data.success) {
+      if (res.data) {
         this._vm.$message.success("登录成功");
         commit("setToken", res.data);
 
@@ -33,14 +33,14 @@ export default {
         //获取token时间戳
         setTokenTime();
       } else {
-        // throw new Error();
         this._vm.$message.error(res.data.msg);
+        throw new Error();
       }
     },
     //获取用户信息
     async getUserInfo(context) {
+      console.log(context);
       const res = await getUserInfo(context.state.token.userId);
-
 
       context.commit("setUserInfo", res);
     },

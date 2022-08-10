@@ -50,7 +50,6 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-
     if (
       response.request.responseURL ===
       "http://localhost:8080/api/user-service/user/login"
