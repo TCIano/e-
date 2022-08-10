@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="新增区域"
+      :title="optionName"
       :visible="eAvisible"
       width="50%"
       :before-close="handleClose"
@@ -72,7 +72,15 @@ export default {
     },
   },
   created() {},
-
+  computed: {
+    optionName() {
+      if (this.ruleForm.id) {
+        return "编辑区域";
+      } else {
+        return "新建区域";
+      }
+    },
+  },
   methods: {
     //关闭弹窗
     handleClose() {
@@ -92,6 +100,7 @@ export default {
       if (!this.ruleForm.id) {
         //添加
         await addRegionApi(this.ruleForm);
+        this.$message.success("添加成功");
         //更新操作
         // this.$emit("refreshData");
         // this.ruleForm = {
@@ -101,6 +110,7 @@ export default {
       } else {
         // this.isEdit = false;
         await editRegionApi(this.ruleForm.id, this.ruleForm);
+        this.$message.success("修改成功");
       }
       this.$emit("refreshData");
       this.handleClose();
@@ -108,7 +118,7 @@ export default {
 
     //获取父组件传递的信息
     getIptValue(val) {
-      console.log(val);
+      // console.log(val);
       this.ruleForm = val;
     },
   },

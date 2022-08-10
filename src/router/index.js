@@ -87,12 +87,12 @@ export const constantRoutes = [
       },
       {
         path: "node",
-        component: () => import("@/views/node"),
+        component: () => import("@/views/node/nodeManage.vue"),
         meta: { title: "点位管理" },
       },
       {
         path: "partner",
-        component: () => import("@/views/node"),
+        component: () => import("@/views/node/business.vue"),
         meta: { title: "合作商管理" },
       },
     ],
