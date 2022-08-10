@@ -23,9 +23,9 @@
       </el-table-column>
 
       <!-- 操作区域 -->
-      <el-table-column fixed="right" label="操作">
+      <el-table-column fixed="right" label="操作" width="250">
         <template slot-scope="scope">
-          <slot name="options" :scope="scope"></slot>
+          <slot name="options" :scope="scope" class="opt"></slot>
           <!-- <el-button @>jianji</el-button> -->
         </template>
       </el-table-column>
@@ -46,7 +46,7 @@ export default {
   props: {
     tableData: {
       type: Array,
-      required:true
+      required: true,
     },
     tableHead: {
       type: Array,
@@ -76,6 +76,9 @@ export default {
   .table {
     margin-top: 10px;
     margin-bottom: 10px;
+    .opt {
+      width: 300px !important;
+    }
   }
   .page {
     margin-top: 10px;

@@ -20,18 +20,17 @@
     </inform>
     <page :pageInfo="pageInfo" @prevClick="prevClick" @nextClick="nextClick">
     </page>
-      <!-- 编辑弹窗 -->
-    <editContent   :visible.sync="editVisible" :scopeRow="scopeRow"/> 
-  <!-- /弹窗 -->
+    <!-- 编辑弹窗 -->
+    <editContent :visible.sync="editVisible" :scopeRow="scopeRow" />
+    <!-- /弹窗 -->
   </div>
 
   <!-- 商品管理主页 -->
-
 </template>
 
 <script>
 import addContent from "./addcontent.vue";
-import editContent from './editDialog.vue'
+import editContent from "./editDialog.vue";
 import inputForm from "./Inputsearch.vue";
 import btn from "@/components/button";
 import inform from "./form/index.vue";
@@ -42,7 +41,7 @@ export default {
   data() {
     return {
       productList: [],
-      scopeRow:{},
+      scopeRow: {},
       dialogVisible: false,
       editVisible: true,
       addVisible: false,
@@ -73,7 +72,7 @@ export default {
     page,
     getupdate,
     addContent,
-    editContent
+    editContent,
   },
 
   created() {
