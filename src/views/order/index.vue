@@ -1,6 +1,10 @@
 <template>
   <div>
-    <inputForm :pageSize="pageSize" :pageIndex="pageIndex" @change="change"></inputForm>
+    <inputForm
+      :pageSize="pageSize"
+      :pageIndex="pageIndex"
+      @change="change"
+    ></inputForm>
 
     <From :tableHead="tableHead" :tableData="orderList">
       <!-- //分页 -->
@@ -12,14 +16,12 @@
 </template>
 
 <script>
-import pageItem from "@/components/pageIndex";
+import pageItem from "@/components/Pageindex";
 import inputForm from "./compoments/inputFrom.vue";
 import From from "./compoments/form.vue";
-import { getOrderList ,searchOrderList} from "@/api/order";
-
+import { getOrderList, searchOrderList } from "@/api/order";
 
 export default {
-  
   name: "order",
   data() {
     return {
@@ -60,12 +62,12 @@ export default {
       pageIndex: "",
       pageSize: "",
       // 改动
-       form:{
-        pageIndex:'',
-        pageSize:'',
-        orderNo:'',
-        startDate:'',
-        endDate:''
+      form: {
+        pageIndex: "",
+        pageSize: "",
+        orderNo: "",
+        startDate: "",
+        endDate: "",
       },
     };
   },
@@ -80,7 +82,6 @@ export default {
   },
 
   methods: {
-    
     async getOrderList() {
       const res = await getOrderList();
       console.log(res);
@@ -94,15 +95,13 @@ export default {
         } else {
           item.status = "出货失败";
         }
-         item.createTime = item.createTime.replace(/-/g, ".");
+        item.createTime = item.createTime.replace(/-/g, ".");
         item.createTime = item.createTime.replace(/T/g, " ");
       });
       this.pageIndex = res.pageIndex;
       this.pageSize = res.pageSize;
 
       this.orderList = res.currentPageRecords;
-    
-      
     },
     // 切换分页
     changePage(newPage) {
@@ -111,13 +110,11 @@ export default {
     },
     // 改动
     async change(val) {
-      
       this.form.startDate = val.value1[0];
       this.form.endDate = val.value1[1];
       this.form.pageIndex = this.pageIndex;
       this.form.pageSize = this.pageSize;
-      this.form.orderNo = val.orderNo
-      
+      this.form.orderNo = val.orderNo;
 
       const res = await searchOrderList(this.form);
       console.log(res);
