@@ -1,25 +1,30 @@
 <template>
   <div>
-    <FacilityTitle :uname="uname" class="title" />
+    <FacilityTitle :uname="uname" @getSou="getSou" class="title" />
     <Table
       :list="List"
       :sum="propertyName"
       @openPopup="openPopup"
       @currentObj="currentObj"
+      :equipment="true"
     >
     </Table>
     <pageIndex :page="page" @changePage="changePage" />
-    <equipmentZT :isShow.sync="isShow" :fand="fand" />
+    <equipmentZT
+      :product="product"
+      :popubList="popubList"
+      :isShow.sync="isShow"
+      :fand="fand"
+    />
   </div>
 </template>
 
 <script>
-import { getList } from "@/api";
+import { getList, souList } from "@/api";
 import FacilityTitle from "@/components/FacilityTitle";
 import Table from "@/components/Table";
 import pageIndex from "@/components/Pageindex";
 import equipmentZT from "@/components/Popup/equipmentZT.vue";
-
 export default {
   data() {
     return {
@@ -28,6 +33,7 @@ export default {
         pageSize: 10,
         totalCount: null,
         totalPage: null,
+        innerCode: "",
       },
       uname: "设备编号",
       List: [],
@@ -51,6 +57,8 @@ export default {
       ],
       isShow: false,
       fand: {},
+      product: [],
+      popubList: {},
     };
   },
 
@@ -63,7 +71,7 @@ export default {
     async getList() {
       try {
         const data = await getList(this.page);
-        console.log(data);
+        // console.log(data);
         this.page.pageIndex = parseInt(data.pageIndex);
         this.page.totalCount = parseInt(data.totalCount);
         this.page.totalPage = parseInt(data.totalPage);
@@ -79,11 +87,20 @@ export default {
     },
     //选择当前点击
     currentObj(id) {
-      console.log(id);
       this.fand = id;
-      console.log(this.fand);
+
+      this.isShow = true;
     },
-    openPopup() {
+    //拿到搜素
+    async getSou(val) {
+      const data = await souList({
+        innerCode: val,
+      });
+      this.List = data.currentPageRecords;
+    },
+    openPopup(a, b) {
+      this.product = a;
+      this.popubList = b;
       this.isShow = true;
     },
   },

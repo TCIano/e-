@@ -63,14 +63,14 @@ export const constantRoutes = [
     meta: { title: "工单管理", icon: "renwu" },
     children: [
       {
-        path: "business",
-        component: () => import("@/views/task"),
+        path: "operation",
+        component: () => import("@/views/task/components/operation"),
         meta: { title: "运营工单" },
       },
       {
-        path: "operation",
-        component: () => import("@/views/task"),
-        meta: { title: "运维护工单" },
+        path: "devOps",
+        component: () => import("@/views/task/components/devOps"),
+        meta: { title: "运维工单" },
       },
     ],
   },
