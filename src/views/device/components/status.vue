@@ -6,11 +6,16 @@
       :sum="propertyName"
       @openPopup="openPopup"
       @currentObj="currentObj"
-      :equipment='true'
+      :equipment="true"
     >
     </Table>
     <pageIndex :page="page" @changePage="changePage" />
-    <equipmentZT :product='product' :popubList='popubList' :isShow.sync="isShow" :fand="fand" />
+    <equipmentZT
+      :product="product"
+      :popubList="popubList"
+      :isShow.sync="isShow"
+      :fand="fand"
+    />
   </div>
 </template>
 
@@ -52,8 +57,8 @@ export default {
       ],
       isShow: false,
       fand: {},
-      product:[],
-      popubList:{}
+      product: [],
+      popubList: {},
     };
   },
 
@@ -93,11 +98,11 @@ export default {
       });
       this.List = data.currentPageRecords;
     },
-    openPopup(a,b){
-      this.product=a
-      this.popubList=b
-      this.isShow=true
-    }
+    openPopup(a, b) {
+      this.product = a;
+      this.popubList = b;
+      this.isShow = true;
+    },
   },
   components: {
     FacilityTitle,
