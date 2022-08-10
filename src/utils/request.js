@@ -52,7 +52,7 @@ request.interceptors.response.use(
   (response) => {
     if (
       response.request.responseURL ===
-      "http://localhost:8080/api/user-service/user/login"
+      "http://likede2-admin.itheima.net/likede/api//user-service/user/login"
     ) {
       return response;
     }
