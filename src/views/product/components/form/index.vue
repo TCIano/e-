@@ -1,5 +1,6 @@
 <template>
   <div class="form">
+    
     <slot />
     <el-table
       class="table"
@@ -40,6 +41,8 @@
 
     <!-- 分页插槽 -->
     <slot name="page" class="page"></slot>
+    
+    <!-- 商品管理列表组件 -->
   </div>
 </template>
 

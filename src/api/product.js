@@ -63,6 +63,25 @@ export function getProductTypeApi() {
       
     })
 }
+// /vm-service/sku/fileUpload
+// 上传图片
+export function getUserServeFileUploadApi(data) {
+  return request({
+    url: "/vm-service/sku/fileUpload",
+    method: "POST",
+    data,
+  });
+}
+// /api/vm-service/sku/:skuId
+// 修改
+export function editProductshopping(id,data) {
+  return request({
+    url: "/vm-service/sku/" + id,
+     method: "PUT",
+    data
+  });
+}
+
 
 export function addProductFnApi(data) {
     return request({
@@ -87,3 +106,7 @@ export function addProductApi(data) {
     data
     })
 }
+
+
+
+
