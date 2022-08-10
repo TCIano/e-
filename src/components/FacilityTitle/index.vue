@@ -2,9 +2,15 @@
   <div>
     <div class="title">
       <span>{{ uname }}：</span
-      ><el-input style="width: 200px" placeholder="请输入" /><el-button class="btn"
+      ><el-input
+        style="width: 200px"
+        v-model="value"
+        placeholder="请输入"
+      /><el-button
+        class="btn"
         style="margin-left: 25px"
         icon="el-icon-search"
+        @click.native="clickFn"
         >查询</el-button
       >
     </div>
@@ -14,17 +20,25 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      value: "",
+    };
   },
 
   created() {},
 
-  methods: {},
+  methods: {
+    clickFn() {
+      this.$emit("getSou", this.value);
+    },
+
+  },
   props: {
     uname: {
       type: String,
       required: true,
     },
+
   },
 };
 </script>
@@ -34,8 +48,8 @@ export default {
   display: flex;
   align-items: center;
 }
-.btn{
-    background-color: #5F84FF;
-    color: #fff;
+.btn {
+  background-color: #5f84ff;
+  color: #fff;
 }
 </style>
