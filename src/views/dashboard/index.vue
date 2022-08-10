@@ -102,8 +102,8 @@
               </el-radio-group>
             </div>
             <div class="err">
-              <div class="saleDataPro">456</div>
-              <div class="saleDataDe">456</div>
+              <div class="saleDataPro"></div>
+              <div class="saleDataDe"></div>
               <!-- <img src="@/assets/rxtj/rxtj4.png" alt="" />
               <div class="tips">暂无数据</div> -->
             </div>
